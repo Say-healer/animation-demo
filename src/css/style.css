@@ -16,12 +16,11 @@ span {
   padding: 0;
 }
 
-/* http://res1.eqh5.com/o_1d1sab6n8s2hcpq1ek41qso154v1h.png */
 .fireworks {
   width: 450px;
   height: 450px;
-  background: url("./big.png") no-repeat;
-  /* background: url("http://res1.eqh5.com/o_1d1sab6n8s2hcpq1ek41qso154v1h.png") no-repeat; */
+  background: url("../images/bigbang.png") no-repeat;
+  /* background: url("//res1.eqh5.com/o_1d1sab6n8s2hcpq1ek41qso154v1h.png") no-repeat; */
   background-position: 0 0;
   cursor: pointer;
   /* transform: scale(.5); */

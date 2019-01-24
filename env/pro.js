@@ -1,6 +1,6 @@
 module.exports = {
   host: {
-      cdn: 'caohenghu.github.io'
+      cdn: 'say-healer.github.io'
   },
   plugin: {
       vue: ''

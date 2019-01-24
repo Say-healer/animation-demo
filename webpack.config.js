@@ -1,13 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const webpack = require('webpack');
 
 
 module.exports = (options) => {
   console.log("options",options)
   const env = require('./env/' + options.config + '.js');
-  const port = env.port || 5555
+  const port = env.port || 4500;
+  const isLocal = options.local
   console.log("env",env)
   const minify = {
     minifyCSS: true,
@@ -19,15 +21,14 @@ module.exports = (options) => {
     removeScriptTypeAttributes: true, // 删除script上的type
     removeStyleLinkTypeAttributes: true // 删除style上的type
 }
-const isLocal = options.local;
   return {
     // 是否开启压缩文件
     mode:isLocal ? 'development' : 'production',
-    entry: {
-      index:'./src/index.js',
-    },
+    entry: [
+      './src'
+    ],
     output: {
-      publicPath:'//' + env.host.cdn + (options.hot? ':' + port : '' ) +'/animation-demo',
+      publicPath:'//' + env.host.cdn + (options.hot? ':' + port : '' ) +'/animation-demo/',
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].bundle.js',
       chunkFilename:'[name].bundle.js'
@@ -37,16 +38,19 @@ const isLocal = options.local;
       new HtmlWebpackPlugin({
         timplate:path.resolve(__dirname, 'dist'),
         filename:'index.html',
-        title:'nanfang',
+        title:'动画demo',
         minify
       }),
      
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackHarddiskPlugin({
+        outputPath: path.resolve(__dirname, 'dist')
+    })
     ],
     // inline-source-map 将打包在一起，source-map 会单独打包一个.map 文件
-    devtool:'source-map',
+    devtool:options.pro ? false : 'source-map',
     devServer: {
-      port:4500,
+      port:port,
       contentBase:'./dist'
     },
     module:{
@@ -58,12 +62,22 @@ const isLocal = options.local;
             'css-loader'
           ]
         },
+        // {
+        //   test:/\.(png|svg|jpg|gif)$/,
+        //   use:[
+        //     'file-loader'
+        //   ]
+        // },
         {
-          test:/\.(png|svg|jpg|gif)$/,
-          use:[
-            'file-loader'
-          ]
-        }
+          test: /\.(png|jpg|gif|svg|ico)$/,
+          use: [{
+              loader: 'url-loader',
+              options: {
+                  name: 'images/[name]-[hash:8].[ext]',
+                  limit: 1000
+              }
+          }]
+      }
       ]
     }
   }

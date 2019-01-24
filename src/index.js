@@ -1,6 +1,6 @@
-import bar from './bar';
-import './style.css';
-bar();
+
+import './css/style.css';
+
 
 window.requestAnimFrame = (function () {
   return window.requestAnimationFrame ||
@@ -27,16 +27,15 @@ function createDiv(x, y) {
   body.appendChild(box);
 
 }
+createDiv(200,200)
 
 
-var startTime = undefined
 
-body.addEventListener('mousedown', function (e) {
-  console.log(e)
+body.addEventListener('click', function (e) {
   let x = e.pageX;
   let y = e.pageY;
-  if(e.target.localName == 'body') {
+  // if(e.target.localName == 'body') {
   createDiv(x, y)
-  }
+  // }
 
 })

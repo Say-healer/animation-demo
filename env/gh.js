@@ -1,5 +1,5 @@
 module.exports = {
   host: {
-      cdn: 'Say-healer.github.io'
+      cdn: 'say-healer.github.io'
   }
 }
