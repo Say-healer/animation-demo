@@ -1,0 +1,48 @@
+body {
+  background: linear-gradient(135deg, #c90015 0%, #c90014 100%) fixed;
+  background: rgba(0, 0, 0, 1);
+  font: 300 16px/1.5 "Open Sans", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+div,
+p,
+span {
+  margin: 0;
+  padding: 0;
+}
+
+/* http://res1.eqh5.com/o_1d1sab6n8s2hcpq1ek41qso154v1h.png */
+.fireworks {
+  width: 450px;
+  height: 450px;
+  background: url("./big.png") no-repeat;
+  /* background: url("http://res1.eqh5.com/o_1d1sab6n8s2hcpq1ek41qso154v1h.png") no-repeat; */
+  background-position: 0 0;
+  cursor: pointer;
+  /* transform: scale(.5); */
+  position: absolute;
+}
+
+.fireworks.is-active {
+  animation-name: inform;
+  animation-timing-function: steps(28);
+  animation-duration: 1.2s;
+  /* animation-delay: 3s; */
+  animation-iteration-count: infinite;
+
+}
+
+@keyframes inform {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -12600px 0;
+  }
+}
